@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140709164356) do
+ActiveRecord::Schema.define(version: 20140710065508) do
 
   create_table "simple_captcha_data", force: true do |t|
     t.string   "key",        limit: 40
@@ -50,6 +50,8 @@ ActiveRecord::Schema.define(version: 20140709164356) do
     t.string   "center_code"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "stripe_charge_id"
+    t.string   "status"
   end
 
 end

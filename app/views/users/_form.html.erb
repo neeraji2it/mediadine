@@ -18,9 +18,9 @@
     <span>E-mail Address * :</span>
     <%= f.text_field :email %>
   </label>
-  
+
   <h4>Product Information</h4>
-  
+
   <label>
     <span>Product Description * :</span>
     <%= f.text_field :product_description %>
@@ -73,6 +73,9 @@
   </label>
   <h4>Shipping Address Section</h4>
   <label>
+    <%= check_box_tag :copy, "true",nil,:onclick => "copy_billing(this.value);"%> Same as Billing Address
+  </label>
+  <label>
     <span>First Name * :</span>
     <%= f.text_field :shipping_firstname %>
   </label>
@@ -82,7 +85,7 @@
   </label>
   <label>
     <span>Last Name *:</span>
-    <%= f.text_field :last_name %>
+    <%= f.text_field :shipping_last_name %>
   </label>
   <label>
     <span>Street Address * :</span>
@@ -124,9 +127,9 @@
     <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"} %>
   </label>
   <label>
-     <%= check_box_tag :terms %> I agree to terms and conditions
+    <%= check_box_tag :terms %> I agree to terms and conditions
   </label>
-  
+
 
   <div class="form-footer">
     <%= f.submit :Pay, :class => "btn-large btn-success" %>
@@ -181,4 +184,31 @@
     which.value = val;
   }
 
+
+ 
+
+
+  $(document).on("click", "#copy", function() {
+    var a = $("input[name='copy']:checked").length
+    if (a == 1) {
+      $("#user_shipping_firstname").val($("#user_first_name").val());
+      $("#user_shipping_mi").val($("#user_mi").val());
+      $("#user_shipping_last_name").val($("#user_last_name").val());
+      $("#user_shipping_address1").val($("#user_address1").val());
+      $("#user_shipping_address2").val($("#user_address2").val());
+      $("#user_shipping_city").val($("#user_city").val());
+      $("#user_shipping_state").val($("#user_state").val());
+      $("#user_shipping_zip").val($("#user_zip").val());
+    }
+    else {
+      $("#user_shipping_firstname").val(" ");
+      $("#user_shipping_mi").val(" ");
+      $("#user_shipping_last_name").val(" ");
+      $("#user_shipping_address1").val(" ");
+      $("#user_shipping_address2").val(" ");
+      $("#user_shipping_city").val(" ");
+      $("#user_shipping_state").val(" ");
+      $("#user_shipping_zip").val(" ");
+    }
+  });
 </script>

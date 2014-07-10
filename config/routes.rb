@@ -2,6 +2,11 @@ Rails.application.routes.draw do
     root :to => "home#index"
     match 'contact_us' => "home#contact_us", :via => [:get, :post]
     resources :users
+    resources :admins do
+      member do
+        get :refund_amount
+      end
+    end
     # The priority is based upon order of creation: first created -> highest priority.
     # See how all your routes lay out with "rake routes".
 

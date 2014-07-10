@@ -18,12 +18,14 @@ class UsersController < ApplicationController
             )
     
             # create Stripe charge
-            charge = Stripe::Charge.create(
+            stripe_charge = Stripe::Charge.create(
                 :customer    => customer.id,
-                :amount      => 100,
-                :description => "#{@user.first_name}",
+                :amount      => @user.price.to_i * 100,
+                :description => "#{@user.card_holder_name}",
                 :currency    => 'usd'
             )
+            
+            @user.update(:stripe_charge_id => stripe_charge[:id],:status => "Paid")
             redirect_to users_path
             flash[:notice] = "User was successfully created"
         else
